@@ -1,0 +1,7 @@
+.TableRow{
+    height: 12.5%;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

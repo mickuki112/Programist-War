@@ -1,0 +1,11 @@
+.DeckCard{
+    width: 8%;
+    height: 25%;
+    border: 2px solid #000;
+    border-radius: 20px;
+    position: absolute;
+    right:0%;
+    bottom:0%;
+    transition: transform 0.3s ease-out;
+    background-color: #aaa;
+}

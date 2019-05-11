@@ -1,0 +1,21 @@
+.Container{
+    width: 30%;
+    margin: auto;
+    height: 40%;
+    position:relative;
+}
+.Title{
+    display: flex;
+    width: 100%;
+    height: 130px;
+}
+.Programist{
+    position:absolute;
+    right:-20%;
+    top:60%;
+    font-size: 5em;
+    z-index: 2;
+    border-top: 3px solid #fff;
+    border-left: 3px solid #fff;
+    color: #fff;
+}

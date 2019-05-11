@@ -1,0 +1,16 @@
+.Abaut{
+    width:30%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 30px;
+}
+.Img{
+    width:80%;
+}
+@media( max-width:1000px){
+    .Abaut{
+        width:60%;
+    }
+}

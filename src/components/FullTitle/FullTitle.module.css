@@ -1,19 +1,21 @@
 .Container{
-    width: 30%;
+    padding: 10px;
+    width: 350px;
     margin: auto;
-    height: 40%;
+    height: 100%;
     position:relative;
 }
 .Title{
     display: flex;
-    width: 100%;
-    height: 130px;
+    width: 200px;
+    height: 50%;
+    margin: auto;
 }
 .Programist{
     position:absolute;
-    right:-20%;
-    top:60%;
-    font-size: 5em;
+    left:40%;
+    top:30%;
+    font-size: 2em;
     z-index: 2;
     border-top: 3px solid #fff;
     border-left: 3px solid #fff;

@@ -3,6 +3,10 @@ import Cards from '../../components/Game/Cards/Cards';
 import styles from './Game.module.css';
 import math from 'mathjs';
 import Table from '../../components/Game/Table/Table';
+import * as cardAttributes from '../../components/Game/Cards/cardAttributes';
+import { connect } from 'react-redux';
+
+
 class Builder extends Component{
     state={
         cards:[{position:19},
@@ -12,11 +16,11 @@ class Builder extends Component{
             {position:19},
             {position:19},
             {position:19},
-                {position:19},
-                {position:19},
-                {position:19},
-                {position:19},
-                {position:19}],
+            {position:19},
+            {position:19},
+            {position:19},
+            {position:19},
+            {position:19}],
         cardOpponent:[{position:19},
             {position:19},
             {position:19},
@@ -24,11 +28,11 @@ class Builder extends Component{
             {position:19},
             {position:19},
             {position:19},
-                {position:19},
-                {position:19},
-                {position:19},
-                {position:19},
-                {position:19}]
+            {position:19},
+            {position:19},
+            {position:19},
+            {position:19},
+            {position:19}]
     }
     game={
         hoverCard:false,
@@ -36,13 +40,17 @@ class Builder extends Component{
         field:[false,false,false,false,false,false,false,false,false,false],
     }
     action=()=>{
-        this.setState({
-            cards:[{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},],
-            cardOpponent:[{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},{position:20},]
+        const newState={...this.state};
+        newState.cards.map((card)=>{
+            card.position=30;
         });
+        newState.cardOpponent.map((card)=>{
+            card.position=30;
+        });
+        this.setState({...newState});
     }
     playTheCard=(id)=>{
-        this.game.field[id]=true;
+        this.game.field[id]={...cardAttributes.PIXEL};
         this.game.fieldPlayed=id;
         const arayCards={...this.state}
         arayCards.cards[this.game.hoverCard].position=id;
@@ -59,8 +67,8 @@ class Builder extends Component{
         const card=this.state.cards.map((counter,i)=>{
             const lenght=this.state.cards.length;
             let styleCard=null;
-            if(counter.position==20){
-                styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+20)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
+            if(counter.position==30){
+                styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }else
             if(counter.position>=0 && 10>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
@@ -72,7 +80,7 @@ class Builder extends Component{
         const cardOpponent=this.state.cardOpponent.map((counter,i)=>{
             const lenght=this.state.cardOpponent.length;
             let styleCard=null;
-            if(counter.position==20){
+            if(counter.position==30){
                 styleCard={transform:"translate3d(-"+(i*(300/lenght)+400)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }
             if(counter.position>=0 && 10>=counter.position){
@@ -94,4 +102,12 @@ class Builder extends Component{
     }
 }
 
-export default Builder;
+
+
+const actionTable = dispatch => {
+    return {
+        onAddCounter: () => dispatch({type: 'PLAY_THE_CARD', val: this.game.hoverCard}),
+    }
+};
+
+export default connect(actionTable)(Builder);

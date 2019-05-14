@@ -6,7 +6,7 @@ const Cards=(props)=>{
             style={props.stylesCard}
             className={styles.DeckCard}
             onClick={props.clicked}>
-         card
+        {props.children}
         </div>
     );
 }

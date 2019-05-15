@@ -50,11 +50,12 @@ class Builder extends Component{
         this.setState({...newState});
     }
     playTheCard=(id)=>{
-        this.game.field[id]={...cardAttributes.PIXEL};
         this.game.fieldPlayed=id;
         const arayCards={...this.state}
         arayCards.cards[this.game.hoverCard].position=id;
         this.setState({...arayCards})
+
+        this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
     }
     hoverCard=(id)=>{
         this.game.hoverCard=id;
@@ -104,10 +105,10 @@ class Builder extends Component{
 
 
 
-const actionTable = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
-        onAddCounter: () => dispatch({type: 'PLAY_THE_CARD', val: this.game.hoverCard}),
+        playTheCard: (hoverCard,fieldPlayed) => dispatch({type: 'PLAY_THE_CARD', val: hoverCard, id: fieldPlayed }),
     }
 };
 
-export default connect(actionTable)(Builder);
+export default connect(null ,mapDispatchToProps)(Builder);

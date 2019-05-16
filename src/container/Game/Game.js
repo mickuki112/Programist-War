@@ -9,30 +9,7 @@ import { connect } from 'react-redux';
 
 class Builder extends Component{
     state={
-        cards:[{position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19}],
-        cardOpponent:[{position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19},
-            {position:19}]
+
     }
     game={
         hoverCard:false,
@@ -40,22 +17,14 @@ class Builder extends Component{
         field:[false,false,false,false,false,false,false,false,false,false],
     }
     action=()=>{
-        const newState={...this.state};
-        newState.cards.map((card)=>{
-            card.position=30;
-        });
-        newState.cardOpponent.map((card)=>{
-            card.position=30;
-        });
-        this.setState({...newState});
+        this.props.giveAwayTheCards();
     }
     playTheCard=(id)=>{
         this.game.fieldPlayed=id;
-        const arayCards={...this.state}
-        arayCards.cards[this.game.hoverCard].position=id;
-        this.setState({...arayCards})
-
         this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
+    }
+    endTur=()=>{
+        this.props.endTurn();
     }
     hoverCard=(id)=>{
         this.game.hoverCard=id;
@@ -65,8 +34,8 @@ class Builder extends Component{
     else
         return(10);}
     render(){
-        const card=this.state.cards.map((counter,i)=>{
-            const lenght=this.state.cards.length;
+        const card=this.props.allCards.cards.map((counter,i)=>{
+            const lenght=this.props.allCards.cards.length;
             let styleCard=null;
             if(counter.position==30){
                 styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
@@ -74,12 +43,12 @@ class Builder extends Component{
             if(counter.position>=0 && 10>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard}/>
+            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
         })
 
 
-        const cardOpponent=this.state.cardOpponent.map((counter,i)=>{
-            const lenght=this.state.cardOpponent.length;
+        const cardOpponent=this.props.allCards.cardOpponent.map((counter,i)=>{
+            const lenght=this.props.allCards.cardOpponent.length;
             let styleCard=null;
             if(counter.position==30){
                 styleCard={transform:"translate3d(-"+(i*(300/lenght)+400)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
@@ -87,7 +56,7 @@ class Builder extends Component{
             if(counter.position>=0 && 10>=counter.position){
                 styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(-300)+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard}/>
+            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
         })
 
 
@@ -97,18 +66,24 @@ class Builder extends Component{
             <Table clicked={this.playTheCard} field={this.game.field}/>
                 {card}
                 <button onClick={this.action}>Start Game</button>
-
+                <button onClick={this.endTur}>endTur</button>
             </div>
         );
     }
 }
 
 
-
+const mapStateToProps = state => {
+    return {
+        allCards: state.table.allCards,
+    }
+};
 const mapDispatchToProps = dispatch => {
     return {
         playTheCard: (hoverCard,fieldPlayed) => dispatch({type: 'PLAY_THE_CARD', val: hoverCard, id: fieldPlayed }),
+        giveAwayTheCards: () =>dispatch({type: 'GIVEAWAYTHECARS'}),
+        endTurn: () =>dispatch({type: 'ENDTURN'}),
     }
 };
 
-export default connect(null ,mapDispatchToProps)(Builder);
+export default connect(mapStateToProps ,mapDispatchToProps)(Builder);

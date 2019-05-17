@@ -9,12 +9,11 @@ import { connect } from 'react-redux';
 
 class Builder extends Component{
     state={
-
-    }
+        aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+    }//^^ta dablica nie potrzebna !!!
     game={
         hoverCard:false,
         fieldPlayed:false,
-        field:[false,false,false,false,false,false,false,false,false,false],
     }
     action=()=>{
         this.props.giveAwayTheCards();
@@ -37,10 +36,10 @@ class Builder extends Component{
         const card=this.props.allCards.cards.map((counter,i)=>{
             const lenght=this.props.allCards.cards.length;
             let styleCard=null;
-            if(counter.position==30){
+            if(counter.position==50){
                 styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }else
-            if(counter.position>=0 && 10>=counter.position){
+            if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
             return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
@@ -50,11 +49,11 @@ class Builder extends Component{
         const cardOpponent=this.props.allCards.cardOpponent.map((counter,i)=>{
             const lenght=this.props.allCards.cardOpponent.length;
             let styleCard=null;
-            if(counter.position==30){
+            if(counter.position==50){
                 styleCard={transform:"translate3d(-"+(i*(300/lenght)+400)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }
-            if(counter.position>=0 && 10>=counter.position){
-                styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(-300)+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
+            if(counter.position>=0 && 20>=counter.position){
+                styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position)-5)*(-4))+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
             return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
         })
@@ -63,7 +62,7 @@ class Builder extends Component{
         return(
             <div className={styles.GameDiv}>
                 {cardOpponent}
-            <Table clicked={this.playTheCard} field={this.game.field}/>
+            <Table clicked={this.playTheCard} field={this.state.aray}/>
                 {card}
                 <button onClick={this.action}>Start Game</button>
                 <button onClick={this.endTur}>endTur</button>
@@ -76,6 +75,7 @@ class Builder extends Component{
 const mapStateToProps = state => {
     return {
         allCards: state.table.allCards,
+        results: state.table.results,
     }
 };
 const mapDispatchToProps = dispatch => {

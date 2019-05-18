@@ -9,3 +9,22 @@
     transition: transform 0.3s ease-out;
     background-color: #1d1e22;
 }
+.Atack{
+    clip-path: polygon(0% 0%, 9% 0%, 74% 62%, 72% 66%, 86% 53%, 95% 60%, 83% 74%, 100% 90%, 93% 100%, 76% 83%, 65% 96%, 55% 89%, 66% 76%, 0% 11%);
+    background-color: #ff6600;
+}
+.Defense{
+    background-color: #7093DB;
+}
+.Life{
+    background-color: #990000;
+}
+.Value > div{
+    margin: 4px;
+    text-align: center;
+    font-size: 25px;
+    color: #fff;
+    height: 18%;
+    width:24%;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}

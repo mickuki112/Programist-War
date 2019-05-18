@@ -53,7 +53,7 @@ class Builder extends Component{
                 styleCard={transform:"translate3d(-"+(i*(300/lenght)+400)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",};//do prawy Y i x
             }
             if(counter.position>=0 && 20>=counter.position){
-                styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position)-5)*(-4))+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
+                styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position-10))*(-11.5)+36)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
             return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
         })

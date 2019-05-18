@@ -4,10 +4,10 @@ const Cards=(props)=>{
     let valCards='jp';
     if(props.valCards){
         valCards=(
-            <div>
-                a={props.valCards.atack}
-                d={props.valCards.defense}
-                l={props.valCards.life}
+            <div className={styles.Value}>
+                <div className={styles.Atack}>{props.valCards.atack}</div>
+                <div className={styles.Defense}>{props.valCards.defense}</div>
+                <div className={styles.Life}>{props.valCards.life}</div>
             </div>
         );
     }

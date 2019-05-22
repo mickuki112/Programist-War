@@ -2,18 +2,42 @@ import React, { Component } from 'react';
 import {Route,Redirect,Switch} from 'react-router-dom';
 import Game from '../Game/Game';
 import Abaut from '../../components/Abaut/Abaut'
-import Sign_in from '../Sign_in/Sign_in';
+import Auth from '../Auth/Auth';
+import { connect } from 'react-redux';
+import Layout from '../../components/Layout/Layout'
+import Logout from '../Auth/Logout/Logout';
 
 class Content extends Component{
+    state = {
+        showSideDrawer: false
+    }
+
+    sideDrawerClosedHandler = () => {
+        this.setState( { showSideDrawer: false } );
+    }
+
+    sideDrawerToggleHandler = () => {
+        this.setState( ( prevState ) => {
+            return { showSideDrawer: !prevState.showSideDrawer };
+        } );
+    }
     render(){
         return(
-            <Switch>
-                <Route path='/sign_in' exact  component={Sign_in}/>
-                <Route path='/abaut' exact  component={Abaut}/>
-                <Route path='/game' component={Game}/>
-                <Redirect from="/" to="/game"  />
-            </Switch>
+            <Layout isAuth={this.props.isAuthenticated}>
+                <Switch>
+                    <Route path='/sign_in' exact  component={Auth}/>
+                    <Route path='/abaut' exact  component={Abaut}/>
+                    <Route path="/logout" component={Logout} />
+                    <Route path='/game' component={Game}/>
+                    <Redirect from="/" to="/game"  />
+                </Switch>
+            </Layout>
         );
     }
 }
-export default Content;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    };
+};
+export default connect( mapStateToProps )(Content);

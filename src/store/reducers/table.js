@@ -1,5 +1,7 @@
 import * as actionTypes from '../actions';
 import * as cardAttributes from '../../components/Game/Cards/cardAttributes';
+import * as cardPictures from '../../components/Game/Cards/cardPictures';
+
 import math from 'mathjs';
 
 const initialState = {
@@ -38,23 +40,31 @@ const reducer = ( state = initialState, action) => {
     const attack =(newAllCards1,direction,attack1,attack2)=>{//alert('a'+direction)
         //const newAllCards1={...state.allCards}
         if(attack2){
+            //const def1=newAllCards1[state.results[direction]].value.defense
+            //const def2=newAllCards1[state.results[direction+5]].value.defense
+            //for optimization!!!
             if(state.results[direction]){
+                const def1=newAllCards1[state.results[direction]].value.defense
                 if(state.results[direction+5]){//alert(1)
-                    newAllCards1[state.results[direction]].value.life-=(attack1);
-                    newAllCards1[state.results[direction+5]].value.life-=(attack2);
+                    const def2=newAllCards1[state.results[direction+5]].value.defense
+                    newAllCards1[state.results[direction]].value.life-=(attack1-def1);
+                    newAllCards1[state.results[direction+5]].value.life-=(attack2-def2);
                 }else{//alert(5)
-                    newAllCards1[state.results[direction]].value.life-=(attack1+attack2);
+                    newAllCards1[state.results[direction]].value.life-=(attack1+attack2-def1);
                 }
             }else
             if(state.results[direction+5]){//alert(2)
-                newAllCards1[state.results[direction+5]].value.life-=(attack1+attack2);
+                const def2=newAllCards1[state.results[direction+5]].value.defense
+                newAllCards1[state.results[direction+5]].value.life-=(attack1+attack2-def2);
             }
         }else{
             if(state.results[direction]){//alert(3)
-                newAllCards1[state.results[direction]].value.life-=(attack1);
+                const def1=newAllCards1[state.results[direction]].value.defense
+                newAllCards1[state.results[direction]].value.life-=(attack1-def1);
             }else
             if(state.results[direction+5]){//alert(4)
-                newAllCards1[state.results[direction+5]].value.life-=(attack1);
+                const def2=newAllCards1[state.results[direction+5]].value.defense
+                newAllCards1[state.results[direction+5]].value.life-=(attack1-def2);
             }
         }
         return newAllCards1;
@@ -62,7 +72,8 @@ const reducer = ( state = initialState, action) => {
     const delteCard=(newCards)=>{
         newCards.map((card,i)=>{
             if(card.value.life<1){
-                newCards.splice(i, 1);
+                //newCards.splice(i, 1);
+                card.position=40;
                         state.results.map((val,j)=>{
                             if(val==i){
                                 return state.results[j]=false;
@@ -74,17 +85,18 @@ const reducer = ( state = initialState, action) => {
         //newCards.splice(0, 1);
     }
 
-    const defense =(newAllCards1,x,y)=>{
+    const defense =(newAllCards1,x,y,def)=>{
         for(let i=0;i<5;i++){
             if(state.results[i+x]){
+                const attack1=def[state.results[i+x]].value.atack
                 if(state.results[i+5+x]){
-                    newAllCards1=attack(newAllCards1,i+y,1,1);
+                    newAllCards1=attack(newAllCards1,i+y,attack1,def[state.results[i+x+5]].value.atack);
                 }else{
-                    newAllCards1=attack(newAllCards1,i+y,1);
+                    newAllCards1=attack(newAllCards1,i+y,attack1);
                 }
             }else
             if(state.results[i+5+x]){
-                newAllCards1=attack(newAllCards1,i+y,1);
+                newAllCards1=attack(newAllCards1,i+y,false,def[state.results[i+x+5]].value.atack);
             }
         }
         return newAllCards1;
@@ -132,10 +144,12 @@ const reducer = ( state = initialState, action) => {
             newState.cards.map((card)=>{
                 card.position=50;
                 card.value={...cardAttributes.PIXEL};//do zmiany
+                card.pictures=cardPictures.PIXEL
             });
             newState.cardOpponent.map((card)=>{
                 card.position=50;
                 card.value={...cardAttributes.PIXEL};//do zmiany
+                card.pictures=cardPictures.PIXEL
             });
             return{...state,
                 allCards:{...newState}};
@@ -143,8 +157,8 @@ const reducer = ( state = initialState, action) => {
             playOponents();
             let newAllCards1=state.allCards.cardOpponent//mozliwe do poprawy !!!
             let newAllCards2=state.allCards.cards
-            newAllCards1=defense(newAllCards1,0,10)
-            newAllCards2=defense(newAllCards2,10,0)
+            newAllCards1=defense(newAllCards1,0,10,newAllCards2)
+            newAllCards2=defense(newAllCards2,10,0,newAllCards1)
             return {...state,
                 allCards:{
                     cardOpponent:delteCard(newAllCards1),

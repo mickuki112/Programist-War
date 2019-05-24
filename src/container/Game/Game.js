@@ -42,7 +42,7 @@ class Builder extends Component{
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
+            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
 
 
@@ -55,7 +55,7 @@ class Builder extends Component{
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position-10))*(-11.5)+36)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}/>
+            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
 
 

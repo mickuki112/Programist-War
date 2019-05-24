@@ -17,7 +17,7 @@ const Cards=(props)=>{
             className={styles.DeckCard}
             onClick={props.clicked}>
         {valCards}
-        {props.children}
+        <div style={props.children} className={styles.Pictures}></div>
         </div>
     );
 }

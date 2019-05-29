@@ -57,7 +57,7 @@ const reducer = ( state = initialState, action) => {
                 const def2=newAllCards1[state.results[direction+5]].value.defense
                 newAllCards1[state.results[direction+5]].value.life-=(attack1+attack2-def2);
             }
-        }else{
+        }else if(attack1){
             if(state.results[direction]){//alert(3)
                 const def1=newAllCards1[state.results[direction]].value.defense
                 newAllCards1[state.results[direction]].value.life-=(attack1-def1);
@@ -71,12 +71,17 @@ const reducer = ( state = initialState, action) => {
     }
     const delteCard=(newCards)=>{
         newCards.map((card,i)=>{
-            if(card.value.life<1){
+            if(card.value.life<=0){
                 //newCards.splice(i, 1);
-                card.position=40;
+                //card.position=40;
                         state.results.map((val,j)=>{
-                            if(val==i){
-                                return state.results[j]=false;
+                            if(card.position==j){
+                                card.position=40;
+                                //newCards[val].position=40;
+                                //newCards[state.results[j]].position=40;
+                                state.results[j]=false;
+                                //return newCards
+                                //return
                             }
                         })
             }
@@ -106,7 +111,7 @@ const reducer = ( state = initialState, action) => {
         let pass=0;
         for(;;){
             x=Math.floor(Math.random() * 10)+10;
-            if(state.results[x]==false){break;}
+            if(state.results[x]===false){break;}
             pass++;
             if(pass>30){return}//fukcja pass
         }
@@ -114,7 +119,7 @@ const reducer = ( state = initialState, action) => {
         pass=0;
         for(;;){
             y=Math.floor(Math.random() * 10)
-            if(state.allCards.cardOpponent[y].position==50){break;}
+            if(state.allCards.cardOpponent[y].position===50){break;}
             pass++;
             if(pass>30){return}//fukcja pass
         }
@@ -159,10 +164,12 @@ const reducer = ( state = initialState, action) => {
             let newAllCards2=state.allCards.cards
             newAllCards1=defense(newAllCards1,0,10,newAllCards2)
             newAllCards2=defense(newAllCards2,10,0,newAllCards1)
+            newAllCards1=delteCard(newAllCards1)
+            newAllCards2=delteCard(newAllCards2)
             return {...state,
                 allCards:{
-                    cardOpponent:delteCard(newAllCards1),
-                    cards:delteCard(newAllCards2),
+                    cardOpponent:newAllCards1,
+                    cards:newAllCards2,
 
             }}
         default:

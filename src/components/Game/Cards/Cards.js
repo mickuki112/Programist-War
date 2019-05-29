@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cards.module.css';
 const Cards=(props)=>{
-    let valCards='jp';
+    let valCards='card';
     if(props.valCards){
         valCards=(
             <div className={styles.Value}>

@@ -5,6 +5,7 @@ import * as cardPictures from '../../components/Game/Cards/cardPictures';
 import math from 'mathjs';
 
 const initialState = {
+    pass:[false,false],
     results: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
     allCards:{
         cards:[{position:40},
@@ -106,14 +107,15 @@ const reducer = ( state = initialState, action) => {
         }
         return newAllCards1;
     }
-    const playOponents=()=>{//tymczasowy bott x=id pola y karta
+    const playOponents=()=>{
+        if(state.pass[1]==false){//tymczasowy bott x=id pola y karta
         let x;
         let pass=0;
         for(;;){
             x=Math.floor(Math.random() * 10)+10;
             if(state.results[x]===false){break;}
             pass++;
-            if(pass>30){return}//fukcja pass
+            if(pass>30){return state.pass[1]=true;}//fukcja pass
         }
         let y;
         pass=0;
@@ -121,7 +123,7 @@ const reducer = ( state = initialState, action) => {
             y=Math.floor(Math.random() * 10)
             if(state.allCards.cardOpponent[y].position===50){break;}
             pass++;
-            if(pass>30){return}//fukcja pass
+            if(pass>30){return state.pass[1]=true;}//fukcja pass
         }
 
         const newResults4=state.results;
@@ -132,8 +134,41 @@ const reducer = ( state = initialState, action) => {
                 results:newResults4,
                 allCards:{...newAllCards2},
             }
+    }}
+    const endTurn=(newAllCards1,newAllCards2)=>{
+        playOponents();
+        newAllCards1=defense(newAllCards1,0,10,newAllCards2)
+        newAllCards2=defense(newAllCards2,10,0,newAllCards1)
+        newAllCards1=delteCard(newAllCards1)
+        newAllCards2=delteCard(newAllCards2)
+        return {...state,
+            allCards:{
+                ...state,
+                cardOpponent:newAllCards1,
+                cards:newAllCards2,
+        }}
     }
-
+    const endGame=(newState)=>{
+        console.log('endGame')
+        let lifePlayer=0;
+        let lifeOpponent=0;
+        newState.allCards.cards.map((card)=>{
+            lifePlayer=lifePlayer+card.value.life
+        })
+        newState.allCards.cardOpponent.map((card)=>{
+            lifeOpponent=lifeOpponent+card.value.life
+        })
+        if(lifePlayer>lifeOpponent){
+            alert('winnner')
+        }else{
+            if(lifePlayer<lifeOpponent){
+                alert('remis')
+            }
+            else{
+                alert('failed')
+            }
+        }
+    }
     switch ( action.type ) {
         case 'PLAY_THE_CARD':
             const newResults=state.results;
@@ -144,6 +179,23 @@ const reducer = ( state = initialState, action) => {
                     results:newResults,
                     allCards:{...newAllCards},
                 }
+        case 'PASS':/*do usuniecia
+            const newPass=state.pass;
+                newPass[0]=true;
+                return{...state,
+                    pass:newPass,
+                }*/
+            if(state.pass[1]){
+                endGame({...state.allCards});
+            }else{
+                let newAllCards1=state.allCards//mozliwe do poprawy !!!
+                for(;!state.pass[1];){
+                    newAllCards1={...endTurn(newAllCards1.allCards.cardOpponent,newAllCards1.allCards.cards)}
+                }
+                endGame(newAllCards1);
+                return {...newAllCards1}
+
+            }
         case 'GIVEAWAYTHECARS':
             const newState={...state.allCards};
             newState.cards.map((card)=>{
@@ -159,19 +211,9 @@ const reducer = ( state = initialState, action) => {
             return{...state,
                 allCards:{...newState}};
         case 'ENDTURN':
-            playOponents();
-            let newAllCards1=state.allCards.cardOpponent//mozliwe do poprawy !!!
-            let newAllCards2=state.allCards.cards
-            newAllCards1=defense(newAllCards1,0,10,newAllCards2)
-            newAllCards2=defense(newAllCards2,10,0,newAllCards1)
-            newAllCards1=delteCard(newAllCards1)
-            newAllCards2=delteCard(newAllCards2)
-            return {...state,
-                allCards:{
-                    cardOpponent:newAllCards1,
-                    cards:newAllCards2,
-
-            }}
+                let newAllCards1=state.allCards.cardOpponent//mozliwe do poprawy !!!
+                let newAllCards2=state.allCards.cards
+                return {...endTurn(newAllCards1,newAllCards2)}
         default:
             return state;
     }

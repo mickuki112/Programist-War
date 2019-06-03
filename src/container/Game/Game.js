@@ -66,6 +66,7 @@ class Builder extends Component{
                 {card}
                 <button onClick={this.action}>Start Game</button>
                 <button onClick={this.endTur}>endTur</button>
+                <button onClick={this.props.pass}>Pass</button>
             </div>
         );
     }
@@ -83,6 +84,7 @@ const mapDispatchToProps = dispatch => {
         playTheCard: (hoverCard,fieldPlayed) => dispatch({type: 'PLAY_THE_CARD', val: hoverCard, id: fieldPlayed }),
         giveAwayTheCards: () =>dispatch({type: 'GIVEAWAYTHECARS'}),
         endTurn: () =>dispatch({type: 'ENDTURN'}),
+        pass: () =>dispatch({type: 'PASS'}),
     }
 };
 

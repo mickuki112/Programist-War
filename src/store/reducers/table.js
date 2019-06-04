@@ -143,7 +143,6 @@ const reducer = ( state = initialState, action) => {
         newAllCards2=delteCard(newAllCards2)
         return {...state,
             allCards:{
-                ...state,
                 cardOpponent:newAllCards1,
                 cards:newAllCards2,
         }}
@@ -169,6 +168,20 @@ const reducer = ( state = initialState, action) => {
             }
         }
     }
+    const distributionCard=()=>{
+        const newState={...state.allCards};
+        newState.cards.map((card)=>{
+            card.position=50;
+            card.value={...cardAttributes.PIXEL};//do zmiany
+            card.pictures=cardPictures.PIXEL
+        });
+        newState.cardOpponent.map((card)=>{
+            card.position=50;
+            card.value={...cardAttributes.PIXEL};//do zmiany
+            card.pictures=cardPictures.PIXEL
+        });
+        return{allCards:{...newState}};
+    }
     switch ( action.type ) {
         case 'PLAY_THE_CARD':
             const newResults=state.results;
@@ -179,37 +192,33 @@ const reducer = ( state = initialState, action) => {
                     results:newResults,
                     allCards:{...newAllCards},
                 }
-        case 'PASS':/*do usuniecia
-            const newPass=state.pass;
-                newPass[0]=true;
-                return{...state,
-                    pass:newPass,
-                }*/
+        case 'PASS':
             if(state.pass[1]){
                 endGame({...state.allCards});
             }else{
-                let newAllCards1=state.allCards//mozliwe do poprawy !!!
+                let newAllCards1={...state}//mozliwe do poprawy !!!
                 for(;!state.pass[1];){
-                    newAllCards1={...endTurn(newAllCards1.allCards.cardOpponent,newAllCards1.allCards.cards)}
+                    newAllCards1={...endTurn(
+                        newAllCards1.allCards.cardOpponent,
+                        newAllCards1.allCards.cards)}
                 }
-                endGame(newAllCards1);
-                return {...newAllCards1}
+                endGame({...newAllCards1});
+                return {
+                    ...state,
+                    ...newAllCards1}
 
             }
-        case 'GIVEAWAYTHECARS':
-            const newState={...state.allCards};
-            newState.cards.map((card)=>{
-                card.position=50;
-                card.value={...cardAttributes.PIXEL};//do zmiany
-                card.pictures=cardPictures.PIXEL
-            });
-            newState.cardOpponent.map((card)=>{
-                card.position=50;
-                card.value={...cardAttributes.PIXEL};//do zmiany
-                card.pictures=cardPictures.PIXEL
-            });
+        case 'NEWGAME':
+            //let newResults1=state.results
+            //newResults1.map((value,i)=>{return newResults1[i]=false})
+            const newResults1=state.results.map((value,i)=>{return value=false})
             return{...state,
-                allCards:{...newState}};
+                results:newResults1,
+                ...distributionCard(),
+                pass:[false,false],};
+        case 'GIVEAWAYTHECARS':
+            return{...state,
+                ...distributionCard()};
         case 'ENDTURN':
                 let newAllCards1=state.allCards.cardOpponent//mozliwe do poprawy !!!
                 let newAllCards2=state.allCards.cards

@@ -1,0 +1,22 @@
+.LeftPanelBack{
+    background-color: #00CCFF;
+    position: relative;
+    width: 20%;
+    height: 100%;
+    top:-70%;
+    right: 3%;
+    text-align: center;
+    clip-path: polygon(50% 10%, 100% 30%, 100% 70%, 50% 90%, 0 100%, 0 0);
+}
+.LeftPanel{
+    background-color: #1d1e22;
+    position: relative;
+    top:5%;
+    width: 90%;
+    height: 70%;
+    padding-top: 50%;
+    clip-path: polygon(50% 10%, 100% 30%, 100% 70%, 50% 90%, 0 100%, 0 0);
+}
+.Button{
+    position: static;
+}

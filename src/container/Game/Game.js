@@ -5,24 +5,28 @@ import math from 'mathjs';
 import Table from '../../components/Game/Table/Table';
 import * as cardAttributes from '../../components/Game/Cards/cardAttributes';
 import { connect } from 'react-redux';
-
+import LeftPanel from '../../components/Game/Panels/LeftPanel/LeftPanel';
 
 class Builder extends Component{
     state={
-        aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+        aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        valueButton:"Start Game",
     }//^^ta dablica nie potrzebna !!!
     game={
         hoverCard:false,
         fieldPlayed:false,
     }
     action=()=>{
+        this.setState({valueButton:"Pass"});
         this.props.giveAwayTheCards();
     }
     playTheCard=(id)=>{
+        this.setState({valueButton:"End Turn"});
         this.game.fieldPlayed=id;
         this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
     }
     endTur=()=>{
+        this.setState({valueButton:"Pass"});
         this.props.endTurn();
     }
     hoverCard=(id)=>{
@@ -32,6 +36,10 @@ class Builder extends Component{
         return(5);
     else
         return(10);}
+    pass=()=>{
+        this.setState({valueButton:"New Game"});
+        this.props.pass()
+    }
     render(){
         const card=this.props.allCards.cards.map((counter,i)=>{
             const lenght=this.props.allCards.cards.length;
@@ -57,16 +65,20 @@ class Builder extends Component{
             }
             return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
-
-
+        const functionButton=()=>{
+            if(this.state.valueButton=='Start Game'){return this.action()}else
+            if(this.state.valueButton=='Pass'){return this.pass()}else
+            if(this.state.valueButton=='End Turn'){return this.endTur()}else
+            if(this.state.valueButton=='New Game'){return this.props.newGame()}
+        }
         return(
             <div className={styles.GameDiv}>
                 {cardOpponent}
             <Table clicked={this.playTheCard} field={this.state.aray}/>
                 {card}
-                <button onClick={this.action}>Start Game</button>
-                <button onClick={this.endTur}>endTur</button>
-                <button onClick={this.props.pass}>Pass</button>
+                <LeftPanel>
+                    <button onClick={functionButton}>{this.state.valueButton}</button>
+                </LeftPanel>
             </div>
         );
     }
@@ -85,6 +97,7 @@ const mapDispatchToProps = dispatch => {
         giveAwayTheCards: () =>dispatch({type: 'GIVEAWAYTHECARS'}),
         endTurn: () =>dispatch({type: 'ENDTURN'}),
         pass: () =>dispatch({type: 'PASS'}),
+        newGame: () =>dispatch({type: 'NEWGAME'}),
     }
 };
 

@@ -6,7 +6,7 @@ import Table from '../../components/Game/Table/Table';
 import * as cardAttributes from '../../components/Game/Cards/cardAttributes';
 import { connect } from 'react-redux';
 import LeftPanel from '../../components/Game/Panels/LeftPanel/LeftPanel';
-
+import ButtonGame from '../../components/Game/ButtonGame/ButtonGame';
 class Builder extends Component{
     state={
         aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
@@ -40,6 +40,10 @@ class Builder extends Component{
         this.setState({valueButton:"New Game"});
         this.props.pass()
     }
+    newGame=()=>{
+        this.props.newGame()
+        this.setState({valueButton:"Start Game"});
+    }
     render(){
         const card=this.props.allCards.cards.map((counter,i)=>{
             const lenght=this.props.allCards.cards.length;
@@ -69,7 +73,7 @@ class Builder extends Component{
             if(this.state.valueButton=='Start Game'){return this.action()}else
             if(this.state.valueButton=='Pass'){return this.pass()}else
             if(this.state.valueButton=='End Turn'){return this.endTur()}else
-            if(this.state.valueButton=='New Game'){return this.props.newGame()}
+            if(this.state.valueButton=='New Game'){return this.newGame()}
         }
         return(
             <div className={styles.GameDiv}>
@@ -77,7 +81,9 @@ class Builder extends Component{
             <Table clicked={this.playTheCard} field={this.state.aray}/>
                 {card}
                 <LeftPanel>
-                    <button onClick={functionButton}>{this.state.valueButton}</button>
+                    <div className={styles.cardOptions0} onClick={this.props.cardGo(this.game.hoverCard,40)}></div>
+                    <ButtonGame onClick={functionButton}>{this.state.valueButton}</ButtonGame>
+                    <div className={styles.cardOptions1} onClick={this.props.cardGo(this.game.hoverCard,50)}></div>
                 </LeftPanel>
             </div>
         );
@@ -98,6 +104,7 @@ const mapDispatchToProps = dispatch => {
         endTurn: () =>dispatch({type: 'ENDTURN'}),
         pass: () =>dispatch({type: 'PASS'}),
         newGame: () =>dispatch({type: 'NEWGAME'}),
+        cardGo: (hoverCard,val) =>dispatch({type: 'CARDGO', val: hoverCard,fieldPlayed: val}),
     }
 };
 

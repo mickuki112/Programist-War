@@ -194,7 +194,7 @@ const reducer = ( state = initialState, action) => {
                 }
         case 'PASS':
             if(state.pass[1]){
-                endGame({...state.allCards});
+                endGame({...state});
             }else{
                 let newAllCards1={...state}//mozliwe do poprawy !!!
                 for(;!state.pass[1];){

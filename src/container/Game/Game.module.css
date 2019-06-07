@@ -9,3 +9,19 @@
     right:0%;
     bottom:0%;
 }
+.cardOptions0{
+    height: 10%;
+    width: 10%;
+    background: #fff;
+
+    top:-6%;
+    left:140px;
+}
+.cardOptions1{
+    height: 10%;
+    width: 10%;
+    background: #fff;
+
+    top:6%;
+    left:140px;
+}

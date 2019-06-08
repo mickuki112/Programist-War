@@ -187,10 +187,22 @@ const reducer = ( state = initialState, action) => {
             const newResults=state.results;
             const newAllCards={...state.allCards}
             newResults[action.id]=action.val;
+            if(newAllCards.cards[action.val].position<=20){
+                newResults[newAllCards.cards[action.val].position]=false;
+            }
             newAllCards.cards[action.val].position=action.id;
                 return {...state,
                     results:newResults,
                     allCards:{...newAllCards},
+                }
+        case 'CARDGO':
+            const newResults3=state.results;
+            const newAllCard={...state.allCards}
+            newResults3[newAllCard.cards[action.val].position]=false;
+            newAllCard.cards[action.val].position=action.fieldPlayed;
+                return {...state,
+                    results:newResults3,
+                    allCards:{...newAllCard},
                 }
         case 'PASS':
             if(state.pass[1]){

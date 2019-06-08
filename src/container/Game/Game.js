@@ -11,6 +11,7 @@ class Builder extends Component{
     state={
         aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
         valueButton:"Start Game",
+        hoverCardBlock:false,
     }//^^ta dablica nie potrzebna !!!
     game={
         hoverCard:false,
@@ -21,16 +22,19 @@ class Builder extends Component{
         this.props.giveAwayTheCards();
     }
     playTheCard=(id)=>{
-        this.setState({valueButton:"End Turn"});
+        this.setState({valueButton:"End Turn",hoverCardBlock:true});
         this.game.fieldPlayed=id;
         this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
     }
     endTur=()=>{
-        this.setState({valueButton:"Pass"});
+        this.setState({valueButton:"Pass",hoverCardBlock:false})
         this.props.endTurn();
     }
-    hoverCard=(id)=>{
-        this.game.hoverCard=id;
+    hoverCard=(id,position)=>{
+        if(40!=position && !this.state.hoverCardBlock){
+            this.game.hoverCard=id;
+            this.setState({hoverCardBlock:true})
+        }
     }
     tableNuber=(position)=>{if(position<5)
         return(5);
@@ -44,6 +48,10 @@ class Builder extends Component{
         this.props.newGame()
         this.setState({valueButton:"Start Game"});
     }
+    cardGo=(position)=>{
+        this.props.cardGo(this.game.hoverCard,position);
+        this.setState({hoverCardBlock:false,valueButton:"Pass"})
+    }
     render(){
         const card=this.props.allCards.cards.map((counter,i)=>{
             const lenght=this.props.allCards.cards.length;
@@ -54,7 +62,7 @@ class Builder extends Component{
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
+            return <Cards clicked={()=>{this.hoverCard(i,counter.position)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
 
 
@@ -67,7 +75,7 @@ class Builder extends Component{
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position-10))*(-11.5)+36)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
-            return <Cards clicked={()=>{this.hoverCard(i)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
+            return <Cards clicked={()=>{this.hoverCard(i,0)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
         const functionButton=()=>{
             if(this.state.valueButton=='Start Game'){return this.action()}else
@@ -81,9 +89,9 @@ class Builder extends Component{
             <Table clicked={this.playTheCard} field={this.state.aray}/>
                 {card}
                 <LeftPanel>
-                    <div className={styles.cardOptions0} onClick={this.props.cardGo(this.game.hoverCard,40)}></div>
+                    <div className={styles.cardOptions0} onClick={()=>{this.cardGo(40)}}><i class="demo-icon icon-reply-all"></i></div>
                     <ButtonGame onClick={functionButton}>{this.state.valueButton}</ButtonGame>
-                    <div className={styles.cardOptions1} onClick={this.props.cardGo(this.game.hoverCard,50)}></div>
+                    <div className={styles.cardOptions1} onClick={()=>{this.cardGo(50)}}></div>
                 </LeftPanel>
             </div>
         );

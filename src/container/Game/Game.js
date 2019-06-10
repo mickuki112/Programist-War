@@ -62,6 +62,9 @@ class Builder extends Component{
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
             }
+            if(counter.position==40){
+                return <Cards clicked={()=>{this.hoverCard(i,counter.position)}} key={i} stylesCard={styleCard}></Cards>
+            }
             return <Cards clicked={()=>{this.hoverCard(i,counter.position)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
         })
 
@@ -74,8 +77,9 @@ class Builder extends Component{
             }
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position-10))*(-11.5)+36)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",};//do prawy Y i x
+                return <Cards clicked={()=>{this.hoverCard(i,0)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
             }
-            return <Cards clicked={()=>{this.hoverCard(i,0)}} key={i} stylesCard={styleCard} valCards={counter.value}>{counter.pictures}</Cards>
+            return <Cards clicked={()=>{this.hoverCard(i,0)}} key={i} stylesCard={styleCard}></Cards>
         })
         const functionButton=()=>{
             if(this.state.valueButton=='Start Game'){return this.action()}else
@@ -89,9 +93,9 @@ class Builder extends Component{
             <Table clicked={this.playTheCard} field={this.state.aray}/>
                 {card}
                 <LeftPanel>
-                    <div className={styles.cardOptions0} onClick={()=>{this.cardGo(40)}}><i class="demo-icon icon-reply-all"></i></div>
+                    <div className={styles.cardOptions0} onClick={()=>{this.cardGo(40)}}><i className="demo-icon icon-trash"></i></div>
                     <ButtonGame onClick={functionButton}>{this.state.valueButton}</ButtonGame>
-                    <div className={styles.cardOptions1} onClick={()=>{this.cardGo(50)}}></div>
+                    <div className={styles.cardOptions1} onClick={()=>{this.cardGo(50)}}><i className="demo-icon icon-reply-all"></i></div>
                 </LeftPanel>
             </div>
         );

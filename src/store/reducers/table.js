@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions';
-import * as cardAttributes from '../../components/Game/Cards/cardAttributes';
-import * as cardPictures from '../../components/Game/Cards/cardPictures';
+import cardAttributes from '../../components/Game/Cards/cardAttributes';
+import cardPictures from '../../components/Game/Cards/cardPictures';
 
 import math from 'mathjs';
 
@@ -48,24 +48,24 @@ const reducer = ( state = initialState, action) => {
                 const def1=newAllCards1[state.results[direction]].value.defense
                 if(state.results[direction+5]){//alert(1)
                     const def2=newAllCards1[state.results[direction+5]].value.defense
-                    newAllCards1[state.results[direction]].value.life-=(attack1-def1);
-                    newAllCards1[state.results[direction+5]].value.life-=(attack2-def2);
+                    if(attack1>def1){newAllCards1[state.results[direction]].value.life-=(attack1-def1);}
+                    if(attack1>def2){newAllCards1[state.results[direction+5]].value.life-=(attack2-def2);}
                 }else{//alert(5)
-                    newAllCards1[state.results[direction]].value.life-=(attack1+attack2-def1);
+                    if((attack1+attack2)>def1){newAllCards1[state.results[direction]].value.life-=(attack1+attack2-def1);}
                 }
             }else
             if(state.results[direction+5]){//alert(2)
                 const def2=newAllCards1[state.results[direction+5]].value.defense
-                newAllCards1[state.results[direction+5]].value.life-=(attack1+attack2-def2);
+                if((attack1+attack2)>def2){newAllCards1[state.results[direction+5]].value.life-=(attack1+attack2-def2);}
             }
         }else if(attack1){
             if(state.results[direction]){//alert(3)
                 const def1=newAllCards1[state.results[direction]].value.defense
-                newAllCards1[state.results[direction]].value.life-=(attack1-def1);
+                if(attack1>def1){newAllCards1[state.results[direction]].value.life-=(attack1-def1);}
             }else
             if(state.results[direction+5]){//alert(4)
                 const def2=newAllCards1[state.results[direction+5]].value.defense
-                newAllCards1[state.results[direction+5]].value.life-=(attack1-def2);
+                if(attack1>def2){newAllCards1[state.results[direction+5]].value.life-=(attack1-def2);}
             }
         }
         return newAllCards1;
@@ -119,8 +119,9 @@ const reducer = ( state = initialState, action) => {
         }
         let y;
         pass=0;
+        const theNumberOfCards=state.allCards.cardOpponent.length
         for(;;){
-            y=Math.floor(Math.random() * 10)
+            y=Math.floor(Math.random() * theNumberOfCards)
             if(state.allCards.cardOpponent[y].position===50){break;}
             pass++;
             if(pass>30){return state.pass[1]=true;}//fukcja pass
@@ -152,10 +153,14 @@ const reducer = ( state = initialState, action) => {
         let lifePlayer=0;
         let lifeOpponent=0;
         newState.allCards.cards.map((card)=>{
-            lifePlayer=lifePlayer+card.value.life
+            if(card.position<=20){
+                lifePlayer=lifePlayer+card.value.life
+            }
         })
         newState.allCards.cardOpponent.map((card)=>{
-            lifeOpponent=lifeOpponent+card.value.life
+            if(card.position<=20){
+                lifeOpponent=lifeOpponent+card.value.life
+            }
         })
         if(lifePlayer>lifeOpponent){
             alert('winnner')
@@ -169,16 +174,19 @@ const reducer = ( state = initialState, action) => {
         }
     }
     const distributionCard=()=>{
+        const theNumberOfCards=cardAttributes.length//przestawic nma początek kodu
         const newState={...state.allCards};
         newState.cards.map((card)=>{
+            const idCard=Math.floor(Math.random() * theNumberOfCards)
             card.position=50;
-            card.value={...cardAttributes.PIXEL};//do zmiany
-            card.pictures=cardPictures.PIXEL
+            card.value={...cardAttributes[idCard]};//do zmiany
+            card.pictures=cardPictures[idCard]
         });
         newState.cardOpponent.map((card)=>{
+            const idCard=Math.floor(Math.random() * theNumberOfCards)
             card.position=50;
-            card.value={...cardAttributes.PIXEL};//do zmiany
-            card.pictures=cardPictures.PIXEL
+            card.value={...cardAttributes[idCard]};//do zmiany
+            card.pictures=cardPictures[idCard]
         });
         return{allCards:{...newState}};
     }

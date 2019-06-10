@@ -1,5 +1,6 @@
 .GameDiv{
     width: 94%;
+    min-width: 1000px;
     height:85%;
     position: absolute;
     margin-left: 3%;
@@ -10,18 +11,31 @@
     bottom:0%;
 }
 .cardOptions0{
-    height: 10%;
-    width: 10%;
-    background: #fff;
-
+    margin: 10px;
+    height: 60px;
+    width: 60px;
+    background: #00CCFF;
+    clip-path: circle(50% at 50% 50%);
     top:-6%;
-    left:140px;
+    font-size: 30px;
+    margin-left: 30px;
+    line-height: 60px;
+    transition: all 0.1s ease-out;
+
 }
 .cardOptions1{
-    height: 10%;
-    width: 10%;
-    background: #fff;
-
+    margin: 10px;
+    height: 60px;
+    width: 60px;
+    background: #00CCFF;
+    clip-path: circle(50% at 50% 50%);
     top:6%;
-    left:140px;
+    font-size: 25px;
+    margin-left: 30px;
+    line-height: 60px;
+    transition: all 0.1s ease-out;
+
+}
+.cardOptions0:hover, .cardOptions1:hover{
+    transform: scale(1.2);
 }

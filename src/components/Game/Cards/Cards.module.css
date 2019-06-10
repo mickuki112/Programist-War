@@ -9,6 +9,13 @@
     transition: transform 0.3s ease-out;
     background-color: #1d1e22;
 }
+.Logo{
+    background-image: url('./img/logo.png');
+    height: 100%;
+    width:100%;
+    border-radius: 20px;
+
+}
 .Atack{
     clip-path: polygon(0% 0%, 9% 0%, 74% 62%, 72% 66%, 86% 53%, 95% 60%, 83% 74%, 100% 90%, 93% 100%, 76% 83%, 65% 96%, 55% 89%, 66% 76%, 0% 11%);
     background-color: #ff6600;
@@ -36,9 +43,9 @@
     top: 5%;
     z-index: -1;
     border-radius: 20px;
-    animation: pixel 6s linear 0s infinite alternate none;
+    /*animation: pixel 6s linear 0s infinite alternate none;*/
 
-}
+}/*
 @keyframes pixel
 {
 0% {
@@ -49,4 +56,4 @@ clip-path: polygon(38% 10%, 44% 0, 53% 0, 58% 7%, 53% 14%, 56% 22%, 65% 23%, 73%
 clip-path: polygon(40% 8%, 44% 0, 55% 2%, 61% 11%, 53% 14%, 56% 22%, 65% 23%, 73% 16%, 93% 0, 62% 38%, 58% 53%, 72% 100%, 51% 68%, 22% 98%, 41% 55%, 40% 41%, 3% 15%, 37% 26%, 46% 23%, 44% 15%);}
 100% {
 clip-path: polygon(38% 10%, 44% 0, 53% 0, 58% 7%, 53% 14%, 56% 22%, 65% 23%, 73% 33%, 91% 68%, 62% 38%, 58% 53%, 72% 100%, 51% 68%, 43% 100%, 41% 55%, 40% 41%, 0 56%, 37% 26%, 46% 23%, 44% 15%);}
-}
+}*/

@@ -1,17 +1,23 @@
 .Abaut{
-    width:30%;
-    margin: auto;
+    margin: 20px auto;
     text-align: center;
-    padding: 20px;
-    border: 2px solid #000;
-    border-radius: 30px;
+    box-shadow: 0 4px 7px #20eCFF;
+    border: 1px solid #00CCFF;
+    padding: 15px 10px;
+    box-sizing: border-box;
     background-color: #1d1e22;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+    width: 500px;
+    color: #FFFFFF;
+    border-radius: 20px;
 }
 .Img{
     width:80%;
 }
-@media( max-width:1000px){
-    .Abaut{
-        width:60%;
+@media (max-width: 600px) {
+    .Abaut {
+        width: 90%;
     }
 }

@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fd9641c8.chunk.css",
+    "main.js": "/static/js/main.94be6173.chunk.js",
+    "main.js.map": "/static/js/main.94be6173.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.133099c7.chunk.js": "/static/js/2.133099c7.chunk.js",
+    "static/js/2.133099c7.chunk.js.map": "/static/js/2.133099c7.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.0440bb1c1c83351a90bf339906c04296.js": "/precache-manifest.0440bb1c1c83351a90bf339906c04296.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.fd9641c8.chunk.css.map": "/static/css/main.fd9641c8.chunk.css.map",
+    "static/media/angular.png": "/static/media/angular.d927cf1a.png",
+    "static/media/index.css": "/static/media/background.4cf7c42b.jpg",
+    "static/media/c++.png": "/static/media/c++.58393424.png",
+    "static/media/css.png": "/static/media/css.65ab0a5a.png",
+    "static/media/fontello.css": "/static/media/fontello.addcd7ad.eot",
+    "static/media/git1.png": "/static/media/git1.a6277caa.png",
+    "static/media/html.png": "/static/media/html.664a8c00.png",
+    "static/media/java.svg": "/static/media/java.e70e2773.svg",
+    "static/media/js.png": "/static/media/js.4c046aea.png",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/Cards.module.css": "/static/media/logo.c02fba41.png",
+    "static/media/php.png": "/static/media/php.39dff610.png",
+    "static/media/python.jpg": "/static/media/python.e4a9e852.jpg",
+    "static/media/react.png": "/static/media/react.e8cb29b4.png",
+    "static/media/ruby.png": "/static/media/ruby.8614e1a4.png",
+    "static/media/symfony.png": "/static/media/symfony.a18e8a05.png"
+  }
+}

@@ -1,6 +1,16 @@
 const cardAttributes=[
-    {//PIXEL
+    /*{//PIXEL
         atack:2,
+        defense:1,
+        life:2,
+    },*/
+    {//HTML
+        atack:2,
+        defense:0,
+        life:2,
+    },
+    {//CSS
+        atack:1,
         defense:1,
         life:2,
     },
@@ -9,15 +19,55 @@ const cardAttributes=[
         defense:2,
         life:3,
     },
-    {//REACT
-        atack:5,
-        defense:1,
+    {//java
+        atack:2,
+        defense:4,
         life:2,
+    },
+    {//JS
+        atack:2,
+        defense:2,
+        life:2,
+    },
+    {//ANGULAR
+        atack:4,
+        defense:1,
+        life:4,
+    },
+    {//REACT
+        atack:4,
+        defense:4,
+        life:1,
     },
     {//VUE
         atack:1,
         defense:4,
         life:4,
+    },
+    {//C++
+        atack:4,
+        defense:0,
+        life:6,
+    },
+    {//c#
+        atack:5,
+        defense:0,
+        life:7,
+    },
+    {//PHP
+        atack:2,
+        defense:4,
+        life:1,
+    },
+    {//SYMFONY
+        atack:2,
+        defense:6,
+        life:4,
+    },
+    {//RUBY ON RAILS
+        atack:3,
+        defense:6,
+        life:2,
     },
 ]
 export default cardAttributes;

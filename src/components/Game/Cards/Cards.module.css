@@ -1,14 +1,20 @@
 .DeckCard{
     width: 8%;
     height: 25%;
-    border: 2px solid #000;
     border-radius: 20px;
     position: absolute;
     right:0%;
     bottom:50%;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.5s ease-out;
     background-color: #1d1e22;
+    box-shadow: 0 4px 7px #20eCFF;
+    border: 2px solid #00CCFF;
 }
+.DeckCard:hover{
+    background-color: #2d2e32;
+    z-index: 200;
+    cursor: pointer;
+    }
 .Logo{
     background-image: url('./img/logo.png');
     height: 100%;

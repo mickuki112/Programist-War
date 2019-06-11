@@ -22,13 +22,16 @@ class Builder extends Component{
         this.props.giveAwayTheCards();
     }
     playTheCard=(id)=>{
-        this.setState({valueButton:"End Turn",hoverCardBlock:true});
-        this.game.fieldPlayed=id;
-        this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
+        if(this.game.hoverCard && !this.props.results[id]){
+            this.setState({valueButton:"End Turn",hoverCardBlock:true});
+            this.game.fieldPlayed=id;
+            this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
+        }
     }
     endTur=()=>{
         this.setState({valueButton:"Pass",hoverCardBlock:false})
         this.props.endTurn();
+        this.game.hoverCard=false;
     }
     hoverCard=(id,position)=>{
         if(40!=position && !this.state.hoverCardBlock){

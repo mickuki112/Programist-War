@@ -6,7 +6,8 @@ import Auth from '../Auth/Auth';
 import { connect } from 'react-redux';
 import Layout from '../../components/Layout/Layout'
 import Logout from '../Auth/Logout/Logout';
-
+import GenesisOfCards from '../GenesisOfCards/GenesisOfCards';
+import HowToPlay from '../HowToPlay/HowToPlay';
 class Content extends Component{
     state = {
         showSideDrawer: false
@@ -28,6 +29,8 @@ class Content extends Component{
                     <Route path='/sign_in' exact  component={Auth}/>
                     <Route path='/abaut' exact  component={Abaut}/>
                     <Route path="/logout" component={Logout} />
+                    <Route path='/genesis_of_cards' component={GenesisOfCards}/>
+                    <Route path='/how_to_play' component={HowToPlay}/>
                     <Route path='/game' component={Game}/>
                     <Redirect from="/" to="/game"  />
                 </Switch>

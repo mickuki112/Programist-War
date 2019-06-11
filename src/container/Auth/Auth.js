@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './Auth.css';
+import styles from './Auth.module.css';
 import * as actions from '../../store/actions/index';
 
 class Auth extends Component {
@@ -130,13 +130,14 @@ class Auth extends Component {
         }
 
         return (
-            <div className={classes.Auth}>
+            <div className={styles.Auth}>
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <button>SUBMIT</button>
+                    <button className={styles.Button}>SUBMIT</button>
                 </form>
                 <button
+                    className={styles.Button}
                     onClick={this.switchAuthModeHandler}
                     >SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
             </div>

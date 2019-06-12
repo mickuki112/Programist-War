@@ -1,6 +1,5 @@
 import React from'react';
 import styles from'./Toolbar.module.css';
-import NavigationItems from '../NavigationItems/NavigationItems';
 import FullTitle from '../../../FullTitle/FullTitle';
 //import {NavLink} from 'react-router-dom';
 const toolbar =(props)=>(
@@ -11,7 +10,7 @@ const toolbar =(props)=>(
                 <div></div>
             </div>
             <div className={styles.Logo}>
-            </div>        
+            </div>
                 <FullTitle/>
         </header>
 );

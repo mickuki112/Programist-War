@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Cards.module.css';
-import FullTitle from '../../FullTitle/FullTitle';
+//import FullTitle from '../../FullTitle/FullTitle';
 
 const Cards=(props)=>{
     let valCards=(<div className={styles.Logo}></div>);

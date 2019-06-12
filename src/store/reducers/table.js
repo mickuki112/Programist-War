@@ -1,8 +1,6 @@
-import * as actionTypes from '../actions';
 import cardAttributes from '../../components/Game/Cards/cardAttributes';
 import cardPictures from '../../components/Game/Cards/cardPictures';
 
-import math from 'mathjs';
 
 const initialState = {
     pass:[false,false],
@@ -73,8 +71,8 @@ const reducer = ( state = initialState, action) => {
     const delteCard=(newCards)=>{
         newCards.map((card,i)=>{
             if(card.value.life<=0){
-                        state.results.map((val,j)=>{
-                            if(card.position==j){
+                        return state.results.map((val,j)=>{
+                            if(card.position===j){
                                 card.position=40;
                                 state.results[j]=false;
                             }
@@ -101,7 +99,7 @@ const reducer = ( state = initialState, action) => {
         return newAllCards1;
     }
     const playOponents=()=>{
-        if(state.pass[1]==false){//bott x=id pola y karta
+        if(state.pass[1]===false){//bott x=id pola y karta
         let x;
         let pass=0;
         for(;;){
@@ -147,13 +145,15 @@ const reducer = ( state = initialState, action) => {
         let lifeOpponent=0;
         newState.allCards.cards.map((card)=>{
             if(card.position<=20){
-                lifePlayer=lifePlayer+card.value.life
+                 lifePlayer=lifePlayer+card.value.life
             }
+
         })
         newState.allCards.cardOpponent.map((card)=>{
             if(card.position<=20){
-                lifeOpponent=lifeOpponent+card.value.life
+                 lifeOpponent=lifeOpponent+card.value.life
             }
+
         })
         if(lifePlayer>lifeOpponent){
             alert('winnner')
@@ -221,6 +221,7 @@ const reducer = ( state = initialState, action) => {
                     ...newAllCards1}
 
             }
+            break
         case 'NEWGAME':
             const newResults1=state.results.map((value,i)=>{return value=false})
             return{...state,

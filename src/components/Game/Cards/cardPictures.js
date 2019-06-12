@@ -1,4 +1,3 @@
-import React from 'react';
 import python from "./img/python.jpg";
 import react from "./img/react.png";
 import vue from "./img/vue.png";

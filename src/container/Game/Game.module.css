@@ -1,6 +1,5 @@
 .GameDiv{
     width: 94%;
-    min-width: 1000px;
     height:85%;
     position: absolute;
     margin-left: 3%;
@@ -38,4 +37,9 @@
 }
 .cardOptions0:hover, .cardOptions1:hover{
     transform: scale(1.2);
+}
+@media (max-width: 800px) {
+    .cardOptions0, .cardOptions1{
+        margin-top: 50px;
+    }
 }

@@ -9,3 +9,8 @@
 .Buffor{
     height: 6%;
 }
+@media (max-width: 800px) {
+    .TableRow{
+        margin-top: 2.5%;
+    }
+}

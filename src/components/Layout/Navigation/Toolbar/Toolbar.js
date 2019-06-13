@@ -1,8 +1,9 @@
 import React from'react';
 import styles from'./Toolbar.module.css';
 import FullTitle from '../../../FullTitle/FullTitle';
-//import {NavLink} from 'react-router-dom';
-const toolbar =(props)=>(
+
+const toolbar =(props)=>{
+    return(
         <header className={styles.Toolbar}>
             <div className={styles.DrawerToggle} onClick={props.clicked}>
                 <div></div>
@@ -11,8 +12,8 @@ const toolbar =(props)=>(
             </div>
             <div className={styles.Logo}>
             </div>
-                <FullTitle/>
+                <FullTitle />
         </header>
-);
+)};
 
 export default toolbar;

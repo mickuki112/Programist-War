@@ -128,7 +128,9 @@ class Auth extends Component {
                 <p>{this.props.error.message}</p>
             );
         }
-
+        if(this.props.token){
+            this.props.history.push('/');
+        }
         return (
             <div className={styles.Auth}>
                 {errorMessage}
@@ -148,7 +150,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        token: state.auth.token
     };
 };
 

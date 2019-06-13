@@ -20,6 +20,7 @@
     margin-left: 30px;
     line-height: 60px;
     transition: all 0.1s ease-out;
+    cursor: pointer;
 
 }
 .cardOptions1{
@@ -33,6 +34,7 @@
     margin-left: 30px;
     line-height: 60px;
     transition: all 0.1s ease-out;
+    cursor: pointer;
 
 }
 .cardOptions0:hover, .cardOptions1:hover{

@@ -5,6 +5,7 @@
     height: 100%;
     color: #fff;
     transition: all 0.3s ease-out;
+    cursor: pointer;
 }
 .Button1{
     clip-path: circle(49% at 50% 50%);

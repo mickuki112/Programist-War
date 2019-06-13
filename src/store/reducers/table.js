@@ -159,10 +159,10 @@ const reducer = ( state = initialState, action) => {
             alert('winnner')
         }else{
             if(lifePlayer<lifeOpponent){
-                alert('remis')
+                alert('failed')
             }
             else{
-                alert('failed')
+                alert('remis')
             }
         }
     }

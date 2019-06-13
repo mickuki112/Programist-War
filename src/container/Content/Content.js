@@ -24,7 +24,9 @@ class Content extends Component{
     }
     render(){
         return(
-            <Layout isAuth={this.props.isAuthenticated}>
+            <Layout
+            //userInf={} 
+            isAuth={this.props.isAuthenticated}>
                 <Switch>
                     <Route path='/sign_in' exact  component={Auth}/>
                     <Route path='/abaut' exact  component={Abaut}/>

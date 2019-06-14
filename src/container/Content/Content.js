@@ -25,7 +25,7 @@ class Content extends Component{
     render(){
         return(
             <Layout
-            //userInf={} 
+            userInf={this.props.userInf}
             isAuth={this.props.isAuthenticated}>
                 <Switch>
                     <Route path='/sign_in' exact  component={Auth}/>
@@ -42,7 +42,8 @@ class Content extends Component{
 }
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        userInf: state.auth.email
     };
 };
 export default connect( mapStateToProps )(Content);

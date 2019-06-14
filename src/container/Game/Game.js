@@ -15,6 +15,7 @@ class Builder extends Component{
     game={
         hoverCard:false,
         fieldPlayed:false,
+        blockade:false
     }
     action=()=>{
         this.setState({valueButton:"Pass"});
@@ -85,11 +86,18 @@ class Builder extends Component{
             }
             return <Cards clicked={()=>{this.hoverCard(i,0)}} key={i} stylesCard={styleCard}></Cards>
         })
-        const functionButton=()=>{
+        const functionValue=()=>{
             if(this.state.valueButton==='Start Game'){return this.action()}else
             if(this.state.valueButton==='Pass'){return this.pass()}else
             if(this.state.valueButton==='End Turn'){return this.endTur()}else
             if(this.state.valueButton==='New Game'){return this.newGame()}
+        }
+        const functionButton=()=>{
+            if(this.game.blockade===false){
+                this.game.blockade=true;
+                functionValue()
+                setTimeout(()=>{this.game.blockade=false;},500)
+            }
         }
         return(
             <div className={styles.GameDiv}>

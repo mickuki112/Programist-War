@@ -4,6 +4,9 @@ import NavigationItem from'./NavigationItem/NavigationItem'
 
 const NavigationItems=(props)=>(
     <ul className={styles.NavigationItems}>
+        {props.userInf ?
+            <p>Online:{props.userInf}</p>:
+            null}
         {!props.isAuthenticated
             ? <NavigationItem link="/sign_in">signin</NavigationItem>
             : <NavigationItem link="/logout">Logout</NavigationItem>}

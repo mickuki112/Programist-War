@@ -78,6 +78,7 @@ const reducer = ( state = initialState, action) => {
                             }
                         })
             }
+
         })
         return newCards
     }

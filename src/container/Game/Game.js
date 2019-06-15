@@ -34,7 +34,7 @@ class Builder extends Component{
         this.game.hoverCard=false;
     }
     hoverCard=(id,position)=>{
-        if(40!==position && !this.state.hoverCardBlock){
+        if(40!==position && this.state.valueButton==="Pass"){//!this.state.hoverCardBlock){
             this.game.hoverCard=id;
             this.setState({hoverCardBlock:true})
         }
@@ -63,6 +63,11 @@ class Builder extends Component{
             let styleCard=null;
             if(counter.position===50){
                 styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",display: 'block'};//do prawy Y i x
+                if(i===this.game.hoverCard){
+                    styleCard={...styleCard,
+                        backgroundColor: '#2d2e32',
+                        zIndex: '200'}
+                }
             }else
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*(this.tableNuber(counter.position)-counter.position))+"%,"+(34+(this.tableNuber(counter.position)-5)*11.5)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",display: 'block'};//do prawy Y i x

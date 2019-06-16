@@ -4,7 +4,7 @@
     border-radius: 20px;
     position: absolute;
     right:calc(2% - 30px);
-    bottom:50%;
+    bottom:calc(25% + 190px);
     transition: transform 0.5s ease-out;
     background-color: #1d1e22;
     box-shadow: 0 4px 7px #20eCFF;

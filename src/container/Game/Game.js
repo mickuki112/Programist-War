@@ -8,10 +8,9 @@ import LeftPanel from '../../components/Game/Panels/LeftPanel/LeftPanel';
 import ButtonGame from '../../components/Game/ButtonGame/ButtonGame';
 class Builder extends Component{
     state={
-        aray:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
         valueButton:"Start Game",
         hoverCardBlock:false,
-    }//^^ta dablica nie potrzebna !!!
+    }
     game={
         hoverCard:false,
         fieldPlayed:false,
@@ -62,7 +61,7 @@ class Builder extends Component{
             const lenght=this.props.allCards.cards.length;
             let styleCard=null;
             if(counter.position===50){
-                styleCard={transform:"translate3d(-"+(-i*(300/lenght)+650)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",display: 'block'};//do prawy Y i x
+                styleCard={transform:"translate3d(-"+(-i*(300/lenght)+695)+"%,"+(155+math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+30)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",display: 'block'};//do prawy Y i x
                 if(i===this.game.hoverCard){
                     styleCard={...styleCard,
                         backgroundColor: '#2d2e32',
@@ -83,7 +82,7 @@ class Builder extends Component{
             const lenght=this.props.allCards.cardOpponent.length;
             let styleCard=null;
             if(counter.position===50){
-                styleCard={transform:"translate3d(-"+(i*(300/lenght)+400)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",display: 'block'};//do prawy Y i x
+                styleCard={transform:"translate3d(-"+(i*(300/lenght)+425)+"%,"+(-160-math.abs(i-lenght/2)*(70/lenght))+"%,"+(i+5)+"px) rotate("+(-30+(60/(lenght-1))*i)+"deg)",display: 'block'};//do prawy Y i x
             }
             if(counter.position>=0 && 20>=counter.position){
                 styleCard={transform:"translate3d(-"+(326+76*((this.tableNuber(counter.position-10)-(counter.position-10))))+"%,"+((this.tableNuber(counter.position-10))*(-11.5)+36)+"%,"+(i+5)+"px) rotate(0deg) scale(0.5)",display: 'block'};//do prawy Y i x
@@ -107,7 +106,7 @@ class Builder extends Component{
         return(
             <div className={styles.GameDiv}>
                 {cardOpponent}
-            <Table clicked={this.playTheCard} field={this.state.aray}/>
+            <Table clicked={this.playTheCard} field={this.props.results}/>
                 {card}
                 <LeftPanel>
                     <div className={styles.cardOptions0} onClick={()=>{this.cardGo(40)}}><i className="demo-icon icon-trash"></i></div>

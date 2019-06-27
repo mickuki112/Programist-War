@@ -33,8 +33,7 @@ const Table=(props)=>{
     }
     })
     return(
-    <React.Fragment>
-    <div className={styles.Buffor}></div>
+    <div className={styles.Table}>
     <div className={styles.TableRow}>
         {table3}
     </div>
@@ -47,7 +46,7 @@ const Table=(props)=>{
     <div className={styles.TableRow}>
         {table1}
     </div>
-    </React.Fragment>
+    </div>
 );}
 
 export default Table;

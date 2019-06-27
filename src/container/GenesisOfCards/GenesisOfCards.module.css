@@ -1,0 +1,22 @@
+.Content{
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 7px #20eCFF;
+    border: 1px solid #00CCFF;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    background-color: #1d1e22;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+    width: 500px;
+    color: #FFFFFF;
+    border-radius: 20px;
+
+    height: 500px;
+}
+@media (max-width: 600px) {
+    .Content {
+        width: 90%;
+    }
+}

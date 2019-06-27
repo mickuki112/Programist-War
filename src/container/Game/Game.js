@@ -21,7 +21,7 @@ class Builder extends Component{
         this.props.giveAwayTheCards();
     }
     playTheCard=(id)=>{
-        if(this.game.hoverCard && !this.props.results[id]){
+        if((this.game.hoverCard || this.game.hoverCard===0)&& !this.props.results[id]){
             this.setState({valueButton:"End Turn",hoverCardBlock:true});
             this.game.fieldPlayed=id;
             this.props.playTheCard(this.game.hoverCard,this.game.fieldPlayed);
@@ -104,9 +104,10 @@ class Builder extends Component{
             }
         }
         return(
+            <React.Fragment>
+            <Table clicked={this.playTheCard} field={this.props.results}/>
             <div className={styles.GameDiv}>
                 {cardOpponent}
-            <Table clicked={this.playTheCard} field={this.props.results}/>
                 {card}
                 <LeftPanel>
                     <div className={styles.cardOptions0} onClick={()=>{this.cardGo(40)}}><i className="demo-icon icon-trash"></i></div>
@@ -114,6 +115,7 @@ class Builder extends Component{
                     <div className={styles.cardOptions1} onClick={()=>{this.cardGo(50)}}><i className="demo-icon icon-reply-all"></i></div>
                 </LeftPanel>
             </div>
+            </React.Fragment>
         );
     }
 }

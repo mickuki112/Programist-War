@@ -6,11 +6,20 @@
     flex-wrap: wrap;
     margin-top: 1%;
 }
-.Buffor{
-    height: 6%;
+.Table{
+    width: 94%;
+    height:85%;
+    position: absolute;
+    margin-top:calc(4%);
+    margin-left:calc(2.75% - 24px);
 }
+
 @media (max-width: 800px) {
     .TableRow{
         margin-top: 2.5%;
+    }
+    .Table{
+        left:4.4%;
+        top:25%;
     }
 }

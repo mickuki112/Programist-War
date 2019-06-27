@@ -3,12 +3,13 @@
     height: 25%;
     border-radius: 20px;
     position: absolute;
-    right:calc(2% - 30px);
-    bottom:calc(25% + 190px);
+    right:2%;
+    bottom:50%;
     transition: transform 0.5s ease-out;
     background-color: #1d1e22;
     box-shadow: 0 4px 7px #20eCFF;
     border: 2px solid #00CCFF;
+    z-index: 2;
 }
 .DeckCard:hover{
     background-color: #2d2e32;
@@ -54,7 +55,7 @@
     .DeckCard{
         min-width: 20%;
         min-height: 120px;
-        right:calc(-68% - 35px);
+        right:-75.5%;
         display: none;
     }
 }

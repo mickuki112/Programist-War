@@ -8,6 +8,8 @@ import Layout from '../../components/Layout/Layout'
 import Logout from '../Auth/Logout/Logout';
 import GenesisOfCards from '../GenesisOfCards/GenesisOfCards';
 import HowToPlay from '../HowToPlay/HowToPlay';
+import styles from './Content.module.css';
+
 class Content extends Component{
     state = {
         showSideDrawer: false
@@ -24,6 +26,8 @@ class Content extends Component{
     }
     render(){
         return(
+            <React.Fragment>
+            <div className={styles.Background}></div>
             <Layout
             userInf={this.props.userInf}
             isAuth={this.props.isAuthenticated}>
@@ -37,6 +41,7 @@ class Content extends Component{
                     <Redirect from="/" to="/game"  />
                 </Switch>
             </Layout>
+            </React.Fragment>
         );
     }
 }

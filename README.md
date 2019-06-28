@@ -3,7 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/mickuki112/Programist-War?branch=master)](https://bettercodehub.com/)
 
 
-I presentProgramming card game play today.
+I present Programming card game play today.
 
 version:1.0.0
 > **Online:** https://programist-war.netlify.com/

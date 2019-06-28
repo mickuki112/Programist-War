@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './Abaut.module.css';
-import git0 from './Pictures/git0.png';
 import git1 from './Pictures/git1.png';
 const Abaut =(props)=>(
     <div  className={styles.Abaut}>
-        <h4>Programist War</h4>
+        <h2>Programist War</h2>
         <p>
 
         </p>
-        <a href="#">
+        <a href="https://github.com/mickuki112/Programist-War">
             <img className={styles.Img}src={git1}/>
-            <img className={styles.Img}src={git0}/>
         </a>
+        I present Programming card game play today.
     </div>
 );
 

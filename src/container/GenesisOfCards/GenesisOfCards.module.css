@@ -9,11 +9,21 @@
     padding: 0 50px;
     height: 100%;
     text-align: center;
-    width: 500px;
+    width: 50%;
     color: #FFFFFF;
     border-radius: 20px;
-
-    height: 500px;
+    padding-bottom:30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    align-items: center;
+}
+.TitleCard{
+    text-align: center;
+    width: 100%;
+    font-size: 40px;
+    color: #fff;
 }
 @media (max-width: 600px) {
     .Content {

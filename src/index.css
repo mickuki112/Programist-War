@@ -5,18 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("img/background.jpg");
-
-
-
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-@media (min-width: 1200px) {
-    body {
-          background-size:cover;
-    }
 }

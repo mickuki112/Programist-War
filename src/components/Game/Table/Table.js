@@ -7,29 +7,29 @@ const Table=(props)=>{
     const table0=props.field.map((_,i)=>{
     if(5>i){
         return <Add key={i}
-            styles={_ ? style : null}
+            styles={_ || _===0 ? style : null}
             clicked={(()=>props.clicked(i))}/>
     }
     })
     const table1=props.field.map((_,i)=>{
     if(5<=i && i<10){
         return <Add key={i}
-            styles={_ ? style : null}
+            styles={_ || _===0 ? style : null}
             clicked={(()=>props.clicked(i))}/>
     }
     })
     const table2=props.field.map((_,i)=>{
     if(10<=i && i<15){
         return <Add key={i}
-            styles={_ ? style : null}
-            clicked={(()=>props.clicked(i))}/>
+            styles={_ || _===0 ? style : null}
+            />
     }
     })
     const table3=props.field.map((_,i)=>{
     if(15<=i && i<20){
         return <Add key={i}
-            styles={_ ? style : null}
-            clicked={(()=>props.clicked(i))}/>
+            styles={_ || _===0 ? style : null}
+            />
     }
     })
     return(
